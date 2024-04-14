@@ -7,9 +7,13 @@ menu = """
 
 => """
 
+from datetime import date
+
+data_de_hoje = date.today()
 saldo = 0
 limite = 500
 extrato = ""
+lis = 1000
 numero_saques = 0
 LIMITE_SAQUES = 3
 
@@ -30,7 +34,7 @@ while True:
     elif opcao == "b":
         valor = float(input("Informe o valor do saque: "))
 
-        excedeu_saldo = valor > saldo
+        excedeu_saldo = valor > saldo + lis
 
         excedeu_limite = valor > limite
 
@@ -54,11 +58,19 @@ while True:
             print("Operação falhou! O valor informado é inválido.")
 
     elif opcao == "c":
+        print(f"\n**********     {data_de_hoje.strftime('%d/%m/%Y')}     **********")
         print("\n================ EXTRATO ================")
         print("Não foram realizadas movimentações." if not extrato else extrato)
-        print(f"\nSaldo: R$ {saldo:.2f}")
+        print(f"\n Saldo: R$ {saldo:.1f}")
+        print(f"\nCheque Especial disponível: R${lis:.2f}")
+        
         print("==========================================")
 
+    elif opcao == "d":
+        break
+
+    else:
+        print("Operação inválida, por favor selecione novamente a operação desejada.")
     elif opcao == "d":
         break
 
